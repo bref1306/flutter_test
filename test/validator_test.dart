@@ -23,5 +23,21 @@ void main() {
 
     //Assert
     expect(result, null);
-  });  
+  }); 
+
+  test('Validate for at least 8 characters for password', () {
+    //Arrange & Act
+    String? result = Validator.validatePassword('pass');
+
+    //Assert
+    expect(result, 'Please enter at least 8 characters');
+  });   
+
+  test('Validate for good lenght password', () {
+    //Arrange & Act
+    String? result = Validator.validatePassword('password');
+
+    //Assert
+    expect(result, null);
+  });   
 }
