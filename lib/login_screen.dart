@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
             key: const Key('password'),
             decoration: const InputDecoration(hintText: 'Enter password'),
           ),
-          ElevatedButton(onPressed: () {}, child: const Text(key: Key('connexion'), 'Login')),
+          ElevatedButton(onPressed: () {}, child: const Text(key: Key('login'), 'Login')),
         ],
       ),
     );
