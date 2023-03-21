@@ -47,4 +47,23 @@ void main() {
     //Assert
     expect(loginButton, findsOneWidget);
   });
+
+  testWidgets('Should show required Fields error message if user email id & password is empty', (WidgetTester tester) async {
+    //Arrange
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: LoginScreen()
+      )
+    );
+
+    //Act
+    Finder loginButton = find.byKey(const Key('login_button')); // Il vaut mieux chercher par clé plutôt que par type
+    await tester.tap(loginButton); // On simule le onTap() du bouton
+    await tester.pumpAndSettle(); // On attend que les events/animations causés par onTap() se produise
+
+    Finder errorTexts = find.text('Required Field');
+
+    //Assert
+    expect(errorTexts, findsNWidgets(2)); // On veut trouver au moins 2 widgets contenant les messages d'erreur
+  });
 }
