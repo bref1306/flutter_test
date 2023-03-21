@@ -66,4 +66,31 @@ void main() {
     //Assert
     expect(errorTexts, findsNWidgets(2)); // On veut trouver au moins 2 widgets contenant les messages d'erreur
   });
+
+  testWidgets('Should submit form when user email id & password is valid', (WidgetTester tester) async {
+    //Arrange
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: LoginScreen()
+      )
+    );
+
+    //Act
+        // On simule l'insertion des identifiants dans les champs
+    Finder usernameField = find.byKey(const Key('email_id'));
+    Finder passwordField = find.byKey(const Key('password'));
+    await tester.enterText(usernameField, "contact@auriane-gs.com"); // On insère un email valide
+    await tester.enterText(passwordField, "password"); // On insère un mot de passe valide (au moins 8 caractères au vu du validator.dart)
+        
+        // On simule le onTap() du bouton de connexion après avoir entré ses identifiants
+    Finder loginButton = find.byKey(const Key('login_button')); 
+    await tester.tap(loginButton);
+    await tester.pumpAndSettle(); 
+
+    Finder errorTexts = find.text('Required Field');
+
+    expect(errorTexts, findsNothing); // On s'attend à ce qu'il y ait aucune erreur donc aucun widget
+
+  });
+  
 }
